@@ -1,23 +1,30 @@
 #!/usr/bin/python
 
 import sys
-#import os
 import socket
 
+helptext = "grabanner.py <IP> <Port>"
 
-def getbanner(ip_address,port):
+def GetBanner(ip_address,port):
   try:
     s = socket.socket()
     s.connect((ip_address,port))
     banner = s.recv(1024)
-    print banner
+    print(banner)
   except socket.error:
     print "Connection Error"
 
 def main():
-
-  ip_address = sys.argv[1]
-  port = int(sys.argv[2])
-  getbanner(ip_address,port)
-
+  try:
+    ip_address = sys.argv[1]
+  except Exception as e:
+    print(helptext)
+    return
+  try:
+    port = int(sys.argv[2])
+  except:
+    print(helptext)
+    return
+  GetBanner(ip_address,port)
+  
 main()

@@ -9,7 +9,7 @@ try:
 except:
   getserver = 0
 
-ipservers = [ 'http://ifconfig.co/ip', 'http://icanhazip.com']
+ipservers = [ 'http://ifconfig.co/ip', 'http://icanhazip.com', 'http://ifconfig.me/ip']
 
 def getmyip(ipservers,getserver):
   
@@ -17,10 +17,14 @@ def getmyip(ipservers,getserver):
 
   if getserver == 'all':
     for server in ipservers:
-      r = requests.get(server)
-      print("IP Supplied by : " + server)
-      print("Your IP is : " + r.text)
-      print("[+]" + "-"*30)
+      try:
+        r = requests.get(server)
+        print("IP Supplied by : " + server)
+        print("Your IP is : " + r.text)
+        print("[+]" + "-"*30)
+      except:
+        print("Server Unreachable")
+        next
 
   if getserver == 'list':
     for server in ipservers:
@@ -28,9 +32,12 @@ def getmyip(ipservers,getserver):
       srvno += 1
 
   if getserver != 'all' and getserver != 'list':
-    r = requests.get(ipservers[int(getserver)])
-    print("IP Supplied by : " + ipservers[int(getserver)])
-    print("Your IP is : " + r.text)
+    try:
+      r = requests.get(ipservers[int(getserver)])
+      print("IP Supplied by : " + ipservers[int(getserver)])
+      print("Your IP is : " + r.text)
+    except:
+      print("Server Unreachable")
 
 
 getmyip(ipservers, getserver)
