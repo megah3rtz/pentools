@@ -27,4 +27,5 @@ def main():
     return
   GetBanner(ip_address,port)
   
-main()
+if __name__ == '__main__':
+  main()
