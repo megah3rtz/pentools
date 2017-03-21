@@ -8,6 +8,7 @@ helptext = "grabanner.py <IP> <Port>"
 def GetBanner(ip_address,port):
   try:
     s = socket.socket()
+    s.settimeout(10)
     s.connect((ip_address,port))
     banner = s.recv(1024)
     print(banner)
